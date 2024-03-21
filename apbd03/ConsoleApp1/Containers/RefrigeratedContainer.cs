@@ -5,7 +5,7 @@ public class RefrigeratedContainer : Container
     public PossibleProducts product { get; set; }
     public double temp { get; set; }
 
-    public RefrigeratedContainer(double cargoMass, double height, double tareWeight, double depth, PossibleProducts product, int temp, Dictionary<PossibleProducts,Double> dictionary) : base(cargoMass, height, tareWeight,depth)
+    public RefrigeratedContainer(double cargoMass, double height, double tareWeight, double depth, PossibleProducts product, int temp, Dictionary<PossibleProducts,Double> dictionary, double maxWeight) : base(cargoMass, height, tareWeight,depth, maxWeight)
     {
         if (dictionary[product] > temp)
         {
@@ -17,5 +17,14 @@ public class RefrigeratedContainer : Container
 
         base.name += "C-" + base.GenerateSerialNumber();
         
+    }
+    public override void Info()
+    {
+        base.Info();
+        Console.WriteLine($"""
+                           Product: {product}
+                           Temperature: {temp}
+                           
+                           """);
     }
 }

@@ -6,7 +6,7 @@ namespace ConsoleApp1.Containers;
 public class GasContainer : Container, IHazardNotifier
 {
     public double pressure { get; set; }
-    public GasContainer(double cargoMass, double height, double tareWeight, double depth, double pressure) : base(cargoMass, height, tareWeight,depth)
+    public GasContainer(double cargoMass, double height, double tareWeight, double depth, double pressure, double maxWeight) : base(cargoMass, height, tareWeight,depth,maxWeight)
     {
         this.pressure = pressure;
         base.name += "G-" + base.GenerateSerialNumber();
@@ -33,4 +33,14 @@ public class GasContainer : Container, IHazardNotifier
     {
         base.cargoMass /= 20;
     }
+    
+    public override void Info()
+    {
+        base.Info();
+        Console.WriteLine($"""
+                           Pressure: {pressure}
+                           
+                           """);
+    }
+    
 }

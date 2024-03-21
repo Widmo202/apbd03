@@ -6,7 +6,7 @@ public class Ship
     public double maxWeight { get; set; }
     public int maxContainers { get; set; }
     
-    public List<Container> Containers = new();
+    public List<Container> Containers = new List<Container>();
 
     public Ship(double maxSpeed, double maxWeight, int maxContainers)
     {
@@ -17,7 +17,7 @@ public class Ship
 
     public bool LoadContainer(Container container)
     {
-        if (maxContainers > Containers.Count)
+        if (maxContainers < Containers.Count+1)
         {
             Console.WriteLine("Too many containers on ship.");
             return false;
@@ -32,8 +32,8 @@ public class Ship
         if (maxWeight > currWeight+container.cargoMass+container.tareWeight)
         {
             Containers.Add(container);
-                    Console.WriteLine("Container added");
-                    return true;
+            Console.WriteLine("Container added");
+            return true;
         }
         Console.WriteLine("Container is to heavy to load");
         return false;
@@ -42,7 +42,7 @@ public class Ship
     public bool LoadContainer(List<Container> containersToLoad)
     {
         
-        if (maxContainers > Containers.Count + containersToLoad.Count)
+        if (maxContainers < Containers.Count + containersToLoad.Count)
         {
             Console.WriteLine("Too many containers on ship.");
             return false;
@@ -106,11 +106,33 @@ public class Ship
         if (Containers.Contains(containerToTransfer))
         {
             if (ship.LoadContainer(containerToTransfer))
+            {
                 UnloadContainer(containerToTransfer);
+                Console.WriteLine("Container was transfered");
+            }
         }
         else
         {
             Console.WriteLine("Container was not found");
         }
+    }
+
+    public void Info()
+    {
+        double cargoWeight = 0;
+
+        foreach (var container in Containers)
+        {
+            cargoWeight += (container.tareWeight + container.cargoMass);
+        }
+        
+        Console.WriteLine($"""
+                           Max speed: {maxSpeed}
+                           Max weight: {maxWeight}
+                           Max containers: {maxContainers}
+                           Current amount of containers: {Containers.Count}
+                           Current weight of cargo: {cargoWeight}
+                           
+                           """);
     }
 }

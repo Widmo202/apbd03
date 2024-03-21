@@ -7,7 +7,7 @@ public class LiquidContainer : Container, IHazardNotifier
 {
     public bool hazardous { get; set; }
     public string cargoName { get; set; }
-    public LiquidContainer(double cargoMass, double height, double tareWeight, double depth, bool hazardous, string cargoName) : base(cargoMass, height, tareWeight,depth)
+    public LiquidContainer(double cargoMass, double height, double tareWeight, double depth, bool hazardous, string cargoName, double maxWeight) : base(cargoMass, height, tareWeight,depth,maxWeight)
     {
         this.cargoName = cargoName;
         this.hazardous = hazardous;
@@ -29,5 +29,15 @@ public class LiquidContainer : Container, IHazardNotifier
         {
             base.Load(cargoMass);
         }
+    }
+
+    public override void Info()
+    {
+        base.Info();
+        Console.WriteLine($"""
+                          Hazardous: {hazardous}
+                          Liquid: {cargoName}
+                          
+                          """);
     }
 }

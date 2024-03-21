@@ -16,13 +16,14 @@ public abstract class Container : IContainer
 
     private static int lastSerialNumber = 0;
 
-    protected Container(double cargoMass, double height, double tareWeight, double depth)
+    protected Container(double cargoMass, double height, double tareWeight, double depth, double maxWeight)
     {
         this.cargoMass = cargoMass;
         this.height = height;
         this.cargoMass = cargoMass;
         this.tareWeight = tareWeight;
         this.depth = depth;
+        this.maxWeight = maxWeight;
         name = "KON-";
     }
 
@@ -44,5 +45,15 @@ public abstract class Container : IContainer
         number = lastSerialNumber;
         return lastSerialNumber;
     }
-    
+
+    public virtual void Info()
+    {
+        Console.WriteLine($"""
+                          Name: {name}
+                          Current cargo: {cargoMass}
+                          Tare Weight: {tareWeight}
+                          Height: {height}
+                          Depth: {depth}
+                          """);
+    }
 }
